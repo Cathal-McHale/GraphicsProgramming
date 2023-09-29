@@ -9,7 +9,9 @@
     <style type="text/css">
 	canvas
     {
-        border: black 8px double;
+        border: black 10px double;
+        height: 400px;
+        width: 400px;
     }
     </style>
 
@@ -33,13 +35,17 @@
 
 		// Create a filled rectangle
    
-        ctx.rect(20, 20, 150, 100); 
+        ctx.rect(5, 5, 800, 600); 
 		ctx.stroke();
 	  
 
         //create a circle inside the rectangle
-         //   ctx.beginPath();
-            ctx.arc(125, 60, 40, 0, 2 * Math.PI);
+            ctx.beginPath();
+            ctx.arc(70, 70, 40, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(40, 40, 40, 0, 2 * Math.PI);
             ctx.stroke();
 
             //create text box
