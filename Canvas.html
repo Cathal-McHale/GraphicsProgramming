@@ -5,9 +5,16 @@
   <head>
     <meta charset="UTF-8">
     <title>Canvas</title>
-
+    <h1>Cathal McHale</h1>
     <style type="text/css">
-	
+	canvas
+    {
+        position: relative;
+        border:solid;
+        height: 400px;
+        width: 400px;
+        border-width: 40px;
+    }
     </style>
 
   </head>
@@ -18,13 +25,17 @@
 
     <script type="text/javascript">
 		// Gets a handle to the element with id canvasOne.
+		canvas = document.getElementById("myCanvas");
 		
-		// Set the canvas up for drawing in 2D.
-		
+        // Set the canvas up for drawing in 2D.
+		ctx = canvas.getContext("2d");
+
 		// Set the fill colour to bright red.
-		
-		// Create a filled rectangle 
-		
+		ctx.beginPath();
+
+		// Create a filled rectangle
+        ctx.rect(20, 20, 150, 100); 
+		ctx.stroke();
 	  
 		
     </script>
