@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Canvas</title>
-
+    
     <style type="text/css">
 	canvas
     {
@@ -41,12 +41,17 @@
 
         //create a circle inside the rectangle
             ctx.beginPath();
-            ctx.arc(70, 70, 40, 0, 2 * Math.PI);
+            ctx.arc(250, 70, 40, 0, 2 * Math.PI);
             ctx.stroke();
 
             ctx.beginPath();
-            ctx.arc(40, 40, 40, 0, 2 * Math.PI);
+            ctx.arc(100, 50, 40, 0, 2 * Math.PI,);
             ctx.stroke();
+            //semi circle
+            ctx.beginPath();
+            ctx.arc(50, 100, 40, 0, Math.PI,);
+            ctx.stroke();
+
 
             //create text box
             ctx.font = "30px Arial";
