@@ -5,15 +5,11 @@
   <head>
     <meta charset="UTF-8">
     <title>Canvas</title>
-    <h1>Cathal McHale</h1>
+
     <style type="text/css">
 	canvas
     {
-        position: relative;
-        border:solid;
-        height: 400px;
-        width: 400px;
-        border-width: 20px;
+        border: black 8px double;
     }
     </style>
 
@@ -25,7 +21,7 @@
 
     <script type="text/javascript">
 		// Gets a handle to the element with id canvasOne.
-		canvas = document.getElementById("myCanvas");
+		canvas = document.getElementById("canvasOne");
 		
         // Set the canvas up for drawing in 2D.
 		ctx = canvas.getContext("2d");
@@ -36,18 +32,19 @@
 		ctx.beginPath();
 
 		// Create a filled rectangle
-        beginPath()
+   
         ctx.rect(20, 20, 150, 100); 
 		ctx.stroke();
 	  
 
         //create a circle inside the rectangle
-            var c = document.getElementById("myCanvas");
-            var ctx = c.getContext("2d");
-            ctx.beginPath();
-            ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+         //   ctx.beginPath();
+            ctx.arc(125, 60, 40, 0, 2 * Math.PI);
             ctx.stroke();
-		
+
+            //create text box
+            ctx.font = "30px Arial";
+            ctx.fillText("Cathal McHale, 10, 50");
     </script>
 
   </body>
