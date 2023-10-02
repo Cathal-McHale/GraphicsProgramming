@@ -36,10 +36,10 @@
 		ctx.beginPath();
 
 		// Create a filled rectangle
-   
-        ctx.rect(5, 5, 850, 650); 
+    ctx.fillStyle ="rgba(190,320,0,0.4)";
+    ctx.rect(5, 5, 850, 650); 
 		ctx.stroke();
-       
+    ctx.fill();
 	  
 
         //create a circle inside the rectangle
@@ -51,24 +51,31 @@
             
 
             ctx.beginPath();
-            ctx.arc(400, 350, 60, 0, 2 * Math.PI,);
+            ctx.arc(350, 250, 60, 0, 2 * Math.PI,);
             ctx.fillStyle ="rgba(255,0,0,0.4)";
             ctx.stroke();
             ctx.fill();
 
             //semi circle
             ctx.beginPath();
-            ctx.arc(650, 500, 60, 0, Math.PI,);
+            ctx.arc(300, 300, 60, 0, Math.PI,);
             ctx.closePath();//closes semi-Circle
-            ctx.fillStyle ="rgba(200,0,0.4)";
+            ctx.fillStyle ="rgba(100,0,0,0.4)";
             ctx.stroke();
             ctx.fill();
 
 
+              // Rectangle with a black outline
+      ctx.beginPath();
+      ctx.rect(8, 8, 250, 50);
+      ctx.fillStyle ="rgba(250,190,0,0.4)";
+      ctx.stroke(); // Draw the outline
+      ctx.fill();
+
             //create text box
             ctx.font = "30px Arial";
             ctx.fillStyle = "black";
-            ctx.fillText("Cathal McHale", 10, 30);
+            ctx.fillText("Cathal McHale", 25, 45);
     </script>
 
   </body>
