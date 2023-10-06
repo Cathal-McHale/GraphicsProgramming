@@ -1,103 +1,69 @@
 <!DOCTYPE html>
-
 <html>
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Canvas</title>
-    
+
     <style type="text/css">
-	canvas
-    {
-        border: black 2px double;
-       
-    }
+        canvas {
+            border: 2px solid black;
+        }
     </style>
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <canvas id="canvasOne" width="800" height="600" ></canvas>
+    <canvas id="canvasOne" width="600" height="400"></canvas>
 
-    
     <script type="text/javascript">
-		// Gets a handle to the element with id canvasOne.
-    
-		canvas = document.getElementById("canvasOne");
-		
-        // Set the canvas up for drawing in 2D.
-		ctx = canvas.getContext("2d");
+        // Gets a handle to the element with id canvasOne.
+        var canvas = document.getElementById("canvasOne");
 
-		// Set the fill colour to bright red.
+        // Set the canvas up for drawing in 2D.
+        var ctx = canvas.getContext("2d");
+
+        // Set the fill colour to bright red.
         ctx.fillStyle = "rgba(180, 0, 0)";
 
-        
-		ctx.beginPath();
+        // Create a filled rectangle
+        ctx.fillStyle = "rgba(190, 220, 0, 0.4)";
+        ctx.fillRect(5, 5, 850, 650);
 
-		// Create a filled rectangle
-    ctx.fillStyle ="rgba(190,220,0,0.4)";
-    ctx.rect(5, 5, 850, 650); 
-		ctx.stroke();
-    ctx.fill();
-	  
+        // create a circle inside the rectangle
+        ctx.beginPath();
+        ctx.arc(250, 250, 80, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(0, 255, 0, 0.4)";
+        ctx.stroke();
+        ctx.fill();
 
-        //create a circle inside the rectangle
-            ctx.beginPath();
-            ctx.fillStyle ="rgba(0,255,0,0.4)";
-            ctx.arc(250, 250, 80, 0, 2 * Math.PI);
-            ctx.stroke();
-            ctx.fill();
-            
+        ctx.beginPath();
+        ctx.arc(350, 250, 60, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(255, 0, 0, 0.4)";
+        ctx.stroke();
+        ctx.fill();
 
-            ctx.beginPath();
-            ctx.arc(350, 250, 60, 0, 2 * Math.PI,);
-            ctx.fillStyle ="rgba(255,0,0,0.4)";
-            ctx.stroke();
-            ctx.fill();
+        // semi circle
+        ctx.beginPath();
+        ctx.arc(300, 300, 60, 0, Math.PI);
+        ctx.closePath(); // closes semi-Circle
+        ctx.fillStyle = "rgba(100, 0, 0, 0.4)";
+        ctx.stroke();
+        ctx.fill();
 
-            //semi circle
-            ctx.beginPath();
-            ctx.arc(300, 300, 60, 0, Math.PI,);
-            ctx.closePath();//closes semi-Circle
-            ctx.fillStyle ="rgba(100,0,0,0.4)";
-            ctx.stroke();
-            ctx.fill();
+        // Rectangle with a black outline
+        ctx.beginPath();
+        ctx.rect(8, 8, 250, 50);
+        ctx.fillStyle = "rgba(250, 190, 0, 0.4)";
+        ctx.stroke(); // Draw the outline
+        ctx.fill();
 
-
-              // Rectangle with a black outline
-      ctx.beginPath();
-      ctx.rect(8, 8, 250, 50);
-      ctx.fillStyle ="rgba(250,190,0,0.4)";
-      ctx.stroke(); // Draw the outline
-      ctx.fill();
-
-            //create text box
-            ctx.font = "30px Arial";
-            ctx.fillStyle = "black";
-            ctx.fillText("Cathal McHale", 25, 45);
-
+        // create text box
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("Cathal McHale", 25, 45);
     </script>
 
-      
-      <canvas id="CanvasTwo" width="225" height=" 360"></canvas>
-
-      <script type="text/javascript">
-            //halfway line
-            ctx.beginPath();
-            //ctx.fillStyle ="rgba(0,255,0,0.4)";
-            ctx.arc(150, 750, 80, 0, 2 * Math.PI);
-            ctx.stroke();
-            ctx.fill(); 
-
-
-
-
-
-
-
-
-      </script>
-  </body>
-
+   </body>
 </html>
