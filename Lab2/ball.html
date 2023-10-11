@@ -11,7 +11,7 @@
   </head>
   <body>
     <h1>Cathal McHale</h1>
-    <canvas id="canvas-for-ball" height="400" width="600" style="border: 2px solid black;"></canvas>
+    <canvas id="canvas-for-ball" height="200" width="300" style="border: 2px solid black;"></canvas>
     <script type="text/javascript">
   var canvas = document.getElementById("canvas-for-ball");
   var ctx = canvas.getContext("2d");
@@ -50,7 +50,7 @@
   }
 }
  // Create a ball object
-var ball = new Ball(50, 10, 3, 1);
+var ball = new Ball(50, 20, 3, 1);
 
 function repeatme() {
   ball.move();
