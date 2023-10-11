@@ -1,87 +1,66 @@
-
 <!DOCTYPE html>
-
 <html>
-
   <head>
     <meta charset="UTF-8">
     <title>Ball</title>
-    <h1>Cathal McHale</h1>
     <style type="text/css">
       body {
-          background-color: white;
+        background-color: white;
       }
     </style>
-
   </head>
-
   <body>
-
+    <h1>Cathal McHale</h1>
     <canvas id="canvas-for-ball" height="400" width="600" style="border: 2px solid black;"></canvas>
-
     <script type="text/javascript">
-      // Gets a handle to the element with id canvasOne.
-      var canvas = document.getElementById("canvas-for-ball");
-      // Get a 2D context for the canvas.
-      var ctx = canvas.getContext("2d");
-      
+  var canvas = document.getElementById("canvas-for-ball");
+  var ctx = canvas.getContext("2d");
 
-      //class for Ball
-      class Ball{
-        constructor(x, y, r){
-          this.x = x;
-          this.y = y;
-          this.ySpeed =2;
-          this.r = r;
-        }
+  class Ball {
+  constructor(x, y, r, ySpeed) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.ySpeed = ySpeed;
+  }
 
+  draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+    ctx.stroke();
+  }
 
-        draw(){
-          //draw the ball not filled
-          ctx.beginPath();
-          ctx.arc(50, this.y, this.r, 0, 2 *math.PI);
+  move() {
+    this.y += this.ySpeed;
 
-          ctx.moveTo(50,this.y);
+    if (this.y + this.r >= canvas.height) {
+      // Keep the ball within the canvas
+      this.y = canvas.height - this.r; 
+      // Reverse the ySpeed to make it bounce 
+      this.ySpeed = -this.ySpeed; 
+    }
 
-          var xOC = this.r *math.cos(math.PI/4);
-          var yOC = this.r *math.cos(math.PI/4);
+    if (this.y - this.r <= 0) {
+      this.y = this.r; 
+      this.ySpeed = -this.ySpeed; 
+    }
 
-          ctx.stroke();
-        }
+    this.draw();
+  }
+}
+ // Create a ball object
+var ball = new Ball(50, 10, 3, 1);
 
-        move() {
-          //update the y position
-          this.y = this.ySpeed;
-          //update x position
-          this.x = x;
-          this.r += 0.02;
+function repeatme() {
+  ball.move();
+  requestAnimationFrame(repeatme);
+}
 
-          this.draw();
+repeatme();
 
-          
-        }
+</script>
 
-
-      }
-      // The vertical location of the ball.
-      var y = 10;
-      // A function to repeat every time the animation loops.
-      function repeatme() {
-        // Draw the ball (stroked, not filled).
-        ctx.beginPath();
-        ctx.arc(50, 10, 3, 0, 2 * Math.PI);
-        ctx.stroke();
-        
-        // Update the y location.
-        y += 1;
-        
-        window.requestAnimationFrame(repeatme);
-      }
-      
-      // Get the animation going.
-      repeatme();
     </script>
-
-  </body>                                              
-
+  </body>
 </html>
