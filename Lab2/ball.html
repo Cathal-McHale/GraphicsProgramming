@@ -5,8 +5,8 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Canvas</title>
-
+    <title>Ball</title>
+    <h1>Cathal McHale</h1>
     <style type="text/css">
       body {
           background-color: white;
@@ -17,7 +17,7 @@
 
   <body>
 
-    <canvas id="canvas-for-ball"></canvas>
+    <canvas id="canvas-for-ball" height="400" width="600" style="border: 2px solid black;"></canvas>
 
     <script type="text/javascript">
       // Gets a handle to the element with id canvasOne.
@@ -25,13 +25,51 @@
       // Get a 2D context for the canvas.
       var ctx = canvas.getContext("2d");
       
+
+      //class for Ball
+      class Ball{
+        constructor(x, y, r){
+          this.x = x;
+          this.y = y;
+          this.ySpeed =2;
+          this.r = r;
+        }
+
+
+        draw(){
+          //draw the ball not filled
+          ctx.beginPath();
+          ctx.arc(50, this.y, this.r, 0, 2 *math.PI);
+
+          ctx.moveTo(50,this.y);
+
+          var xOC = this.r *math.cos(math.PI/4);
+          var yOC = this.r *math.cos(math.PI/4);
+
+          ctx.stroke();
+        }
+
+        move() {
+          //update the y position
+          this.y = this.ySpeed;
+          //update x position
+          this.x = x;
+          this.r += 0.02;
+
+          this.draw();
+
+          
+        }
+
+
+      }
       // The vertical location of the ball.
       var y = 10;
       // A function to repeat every time the animation loops.
       function repeatme() {
         // Draw the ball (stroked, not filled).
         ctx.beginPath();
-        ctx.arc(50, y, 3, 0, 2 * Math.PI);
+        ctx.arc(50, 10, 3, 0, 2 * Math.PI);
         ctx.stroke();
         
         // Update the y location.
@@ -44,6 +82,6 @@
       repeatme();
     </script>
 
-  </body>
+  </body>                                              
 
 </html>
