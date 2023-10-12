@@ -22,6 +22,7 @@
     this.y = y;
     this.r = r;
     this.ySpeed = ySpeed;
+    this.xSpeed = xSpeed;
   }
 
   draw() {
@@ -34,7 +35,7 @@
   move() {
     this.y += this.ySpeed;
 
-    if (this.y + this.r >= canvas.height) {
+    if (this.y + this.r >= canvas.height) { 
       // Keep the ball within the canvas
       this.y = canvas.height - this.r; 
       // Reverse the ySpeed to make it bounce 
