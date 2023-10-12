@@ -20,13 +20,14 @@
         constructor(x, y, r, xSpeed, ySpeed) {
           this.x = x;
           this.y = y;
-          this.r = r;
+          this.r = r = 10;
           this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
         }
 
         draw() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
+          // Clear the entire canvas
+          ctx.clearRect(0, 0, canvas.width, canvas.height); 
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
           ctx.stroke();
