@@ -13,63 +13,57 @@
     <h1>Cathal McHale</h1>
     <canvas id="canvas-for-ball" height="200" width="300" style="border: 2px solid black;"></canvas>
     <script type="text/javascript">
-  var canvas = document.getElementById("canvas-for-ball");
-  var ctx = canvas.getContext("2d");
+      var canvas = document.getElementById("canvas-for-ball");
+      var ctx = canvas.getContext("2d");
 
-  class Ball {
-  constructor(x, y, r, ySpeed) {
-    this.x = x;
-    this.y = y;
-    this.r = r;
-    this.ySpeed = ySpeed;
-   // this.xSpeed = xSpeed;
-  }
+      class Ball {
+        constructor(x, y, r, xSpeed, ySpeed) {
+          this.x = x;
+          this.y = y;
+          this.r = r;
+          this.xSpeed = xSpeed;
+          this.ySpeed = ySpeed;
+        }
 
-  draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-    ctx.stroke();
-  }
+        draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+          ctx.stroke();
+        }
 
-  move() {
-    this.y += this.ySpeed;
-   // this.x += this.xSpeed;
-    if (this.y + this.r >= canvas.height) { 
-      // Keep the ball within the canvas
-      this.y = canvas.height - this.r; 
-      // Reverse the ySpeed to make it bounce 
-      this.ySpeed = -this.ySpeed; 
-    }
+        move() {
+          this.x += this.xSpeed;
+          this.y += this.ySpeed;
 
-    if (this.y - this.r <= 0) {
-  // Check if the top of the ball has touched or crossed the top edge of the canvas
-  
-  this.y = this.r; 
-  // Set the y-coordinate of the ball to be exactly at the top edge of the canvas,
-  
-  
-  this.ySpeed = -this.ySpeed; 
-  // Reverse the vertical speed of the ball. "-" for bouncing back up
-  
-}
+          if (this.y + this.r >= canvas.height) {
+            // Ball hits the bottom of the canvas
+            this.y = canvas.height - this.r;
+            this.ySpeed = -this.ySpeed;
+          } else if (this.y - this.r <= 0) {
+            // Ball hits the top of the canvas
+            this.y = this.r;
+            this.ySpeed = -this.ySpeed;
+          }
 
+          if (this.x + this.r >= canvas.width || this.x - this.r <= 0) {
+            // Ball hits the left or right side of the canvas
+            this.xSpeed = -this.xSpeed;
+          }
 
-    this.draw();
-  }
-}
- // Create a ball object
-var ball = new Ball(50, 20, 3, 1);
+          this.draw();
+        }
+      }
 
-function repeatme() {
-  ball.move();
-  requestAnimationFrame(repeatme);
-}
+      // Create a ball object with horizontal and vertical velocity
+      var ball = new Ball(50, 20, 3, 1, 1);
 
-repeatme();
+      function repeatme() {
+        ball.move();
+        requestAnimationFrame(repeatme);
+      }
 
-</script>
-
+      repeatme();
     </script>
   </body>
 </html>
