@@ -29,52 +29,22 @@
       // Make the fill style red.
       ctx.fillStyle = "rgb(255, 0, 0)";
       
-      class Ball {
+      class ball{
         constructor(x, y, r, xSpeed, ySpeed) {
-          this.x = x;
-          this.y = y;
+          this.x = event.clientX;
+          this.y = event.clientY;
           this.r = r = 10;
           this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
-        }
-
-        draw() {
-          // Clear the entire canvas
-          ctx.clearRect(0, 0, canvas.width, canvas.height); 
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-          ctx.stroke();
-        }
-
-        move() {
-          this.x += this.xSpeed;
-          this.y += this.ySpeed;
-
-          if (this.y + this.r >= canvas.height) {
-            // Ball hits the bottom of the canvas
-            this.y = canvas.height - this.r;
-            this.ySpeed = -this.ySpeed;
-          } else if (this.y - this.r <= 0) {
-            // Ball hits the top of the canvas
-            this.y = this.r;
-            this.ySpeed = -this.ySpeed;
-          }
-
-          if (this.x + this.r >= canvas.width || this.x - this.r <= 0) {
-            // Ball hits the left or right side of the canvas
-            this.xSpeed = -this.xSpeed;
-          }
-
-          this.draw();
         }
       }
     
 
       // Create a ball object with horizontal and vertical velocity
-      var ball = new Ball(50, 20, 3, 1, 1);
+      //var ball = new Ball(50, 20, 3, 1, 1);
 
       function repeatme() {
-        ball.move();
+        //ball.move();
         requestAnimationFrame(repeatme);
       }
 
@@ -82,7 +52,7 @@
       
       canvas.addEventListener("click", function(event) { 
         ctx.beginPath();
-        ctx.arc(50, 50, 6, 0, 2 * Math.PI);
+        ctx.arc(event.clientX, event.clientY, 6, 0, 2 * Math.PI);
         ctx.fill();
         
         noClicks += 1;
