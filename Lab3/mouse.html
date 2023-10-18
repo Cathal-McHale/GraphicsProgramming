@@ -29,38 +29,50 @@
       // Make the fill style red.
       ctx.fillStyle = "rgb(255, 0, 0)";
       
-      class ball{
+      class Ball {
         constructor(x, y, r, xSpeed, ySpeed) {
-          this.x = event.clientX;
-          this.y = event.clientY;
-          this.r = r = 10;
+          this.x = x;
+          this.y = y;
+          this.r = r;
           this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
         }
+
+        move() {
+          this.x += this.xSpeed;
+          this.y += this.ySpeed;
+        }
       }
-    
 
       // Create a ball object with horizontal and vertical velocity
-      //var ball = new Ball(50, 20, 3, 1, 1);
+      var ball = new Ball(canvas.width / 2, canvas.height / 2, 6, 0, 0);
 
       function repeatme() {
-        //ball.move();
+         // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ball.move();
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI);
+        ctx.fill();
         requestAnimationFrame(repeatme);
       }
 
       repeatme();
       
-      canvas.addEventListener("click", function(event) { 
-        ctx.beginPath();
-        ctx.arc(event.clientX, event.clientY, 6, 0, 2 * Math.PI);
-        ctx.fill();
-        
+      canvas.addEventListener("click", function(event) {
+        console.log(event); // Log the event object
+        // Get the canvas's position  
+        var rect = canvas.getBoundingClientRect();
+        // Calculate the x position  
+        var x = event.clientX - rect.left; 
+        // Calculate the y position 
+        var y = event.clientY - rect.top; 
+        ball.x = x;
+        ball.y = y;
         noClicks += 1;
         console.log(noClicks);
       });
-      
-      
-     
+
     </script>
 
   </body>
