@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ball</title>
+    <style type="text/css">
+      body {
+        background-color: white;
+      } 
+    </style>
+  </head>
+  <body>
+    <h1>Cathal McHale</h1>
+    <canvas id="canvas-for-ball" height="200" width="300" style="border: 2px solid black;"></canvas>
+    <script type="text/javascript">
+      var canvas = document.getElementById("canvas-for-ball");
+      var ctx = canvas.getContext("2d");
+
+      class Ball {
+        constructor(x, y, r, xSpeed, ySpeed) {
+          this.x = x;
+          this.y = y;
+          this.r = r = 10;
+          this.xSpeed = xSpeed;
+          this.ySpeed = ySpeed;
+        }
+
+        draw() {
+          // Clear the entire canvas
+          ctx.clearRect(0, 0, canvas.width, canvas.height); 
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+          ctx.stroke();
+        }
+
+        move() {
+          this.x += this.xSpeed;
+          this.y += this.ySpeed;
+
+          if (this.y + this.r >= canvas.height) {
+            // Ball hits the bottom of the canvas
+            this.y = canvas.height - this.r;
+            this.ySpeed = -this.ySpeed;
+          } else if (this.y - this.r <= 0) {
+            // Ball hits the top of the canvas
+            this.y = this.r;
+            this.ySpeed = -this.ySpeed;
+          }
+
+          if (this.x + this.r >= canvas.width || this.x - this.r <= 0) {
+            // Ball hits the left or right side of the canvas
+            this.xSpeed = -this.xSpeed;
+          }
+
+          this.draw();
+        }
+      }
+
+      // Create a ball object with horizontal and vertical velocity
+      var ball = new Ball(50, 20, 3, 1, 1);
+
+      function repeatme() {
+        ball.move();
+        requestAnimationFrame(repeatme);
+      }
+
+      repeatme();
+    </script>
+  </body>
+</html>
