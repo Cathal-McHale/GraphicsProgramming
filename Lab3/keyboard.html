@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Canvas</title>
+    <h1>Cathal McHale</h1>
     <style type="text/css">
       canvas {
         border: 1px solid grey;
@@ -89,6 +90,8 @@
         moveDown() {
           this.y += this.ySpeed;
         }
+
+        
       }
 
       const paddle1 = new Paddle(10, 25, 10, 80, 5);
@@ -128,20 +131,20 @@
 
 
            
-            case 87: // W key
+            case 87: // W key for left paddle
             paddle1.moveUp();
             break;
       
             
-            case 83: // S key
+            case 83: // S key left paddle
             paddle1.moveDown();
             break;
 
-            case 38: // Up arrow key
+            case 38: // Up arrow key right paddle
             paddle2.moveUp();
             break;
-            
-            case 40: // Down arrow key
+
+            case 40: // Down arrow key right paddle
             paddle2.moveDown();
             break;
         }
