@@ -91,13 +91,15 @@
         }
       }
 
-      const paddle = new Paddle(10, 25, 10, 80, 5, 5);
+      const paddle1 = new Paddle(10, 25, 10, 80, 5);
+      const paddle2 = new Paddle(canvas.width - 20, 25, 10, 80, 5);
 
       function updateCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ball.move();
         ball.draw();
-        paddle.draw();
+        paddle1.draw();
+        paddle2.draw();
         requestAnimationFrame(updateCanvas);
       }
 
@@ -118,17 +120,29 @@
             console.log('left arrow key pressed!');
             break;
 
-            case 38: // Up arrow key
-            paddle.moveUp();
-            break;
-          
-          // key code for right arrow
+             // key code for right arrow
           case 39:
             console.log('right arrow key pressed!');
             break;
-          
+
+
+
+           
+            case 87: // W key
+            paddle1.moveUp();
+            break;
+      
+            
+            case 83: // S key
+            paddle1.moveDown();
+            break;
+
+            case 38: // Up arrow key
+            paddle2.moveUp();
+            break;
+            
             case 40: // Down arrow key
-            paddle.moveDown();
+            paddle2.moveDown();
             break;
         }
       });
