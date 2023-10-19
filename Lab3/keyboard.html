@@ -20,7 +20,7 @@
       // Make the fill style red.
       ctx.fillStyle = "rgb(255, 0, 0)";
 
-	  class Paddle {
+	  class Ball {
         constructor(x, y, r, xSpeed, ySpeed) {
           this.x = x;
           this.y = y;
@@ -30,10 +30,11 @@
         }
 
         draw() {
-		 ctx.clearRect(0, 0, canvas.width, canvas.height);
-		 ctx.fillStyle = "red"; 
- 		 ctx.fillRect(this.x, this.y, this.width, this.height);
-		 ctx.fillStyle();
+          // Clear the entire canvas
+          ctx.clearRect(0, 0, canvas.width, canvas.height); 
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+          ctx.stroke();
         }
 
         move() {
@@ -59,12 +60,43 @@
         }
       }
 
+      // Create a ball object with horizontal and vertical velocity
+      var ball = new Ball(50, 20, 3, 1, 1);
+
+      function repeatme() {
+        ball.move();
+        requestAnimationFrame(repeatme);
+      }
+
+      repeatme();
+	  class Paddle {
+		constructor(x, y, width, height, xSpeed, ySpeed) {
+  		this.x = x;
+  		this.y = y;
+  		this.width = width;
+  		this.height = height;
+  		this.xSpeed = xSpeed;
+  		this.ySpeed = ySpeed;
+		}
 
 
+        draw() {
+		 ctx.clearRect(0, 0, canvas.width, canvas.height);
+		 ctx.fillStyle = "black"; 
+ 		 ctx.fillRect(this.x, this.y, this.width, this.height);
+		// ctx.fillStyle();
+        }
 
+        move(keyCode) {
+         //do movement for piece
 
-      // Add a Javascript event listener to the keypress event.
-      window.addEventListener("keypress", function (event) {
+          this.draw();
+        }
+      }
+
+      const paddle = new Paddle(10, 25, 10, 80, 5, 5);
+ // Add a Javascript event listener to the keypress event.
+ window.addEventListener("keypress", function (event) {
         // Just log the event to the console.
         console.log(event);
       });
@@ -78,24 +110,17 @@
             console.log('left arrow key pressed!');
             break;
 
+          case 38:
+            console.log('Up arrow key pressed!')
+            break;
+
           // key code for right arrow
           case 39:
             console.log('right arrow key pressed!');
             break;
-        }
-      });
-
-      $(document.body).on('keyup', function (e) {
-        console.log(e.which);
-        switch (e.which) {
-          // key code for up arrow
-          case 38:
-            console.log('up arrow key pressed!');
-            break;
-
+          
           case 40:
-            console.log('down arrow key pressed!');
-            break;
+            console.log('Down arrow key pressed!');
         }
       });
     </script>
