@@ -11,7 +11,7 @@
     </style>
   </head>
   <body>
-    <canvas id="canvas-for-ball" width="800" height="600"></canvas>
+    <canvas id="canvas-for-ball" width="800" height="500"></canvas>
 
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script type="text/javascript">
@@ -65,12 +65,7 @@
       // Create a ball object with horizontal and vertical velocity
       var ball = new Ball(50, 20, 3, 1, 1);
 
-      function repeatme() {
-        ball.move();
-        requestAnimationFrame(repeatme);
-      }
-
-      repeatme();
+      
       class Paddle {
         constructor(x, y, width, height, ySpeed) {
           this.x = x;
