@@ -55,16 +55,19 @@
       var ball = new Ball(50, 20, 10, 1, 1);
 
       class Paddle {
-        constructor(x, y, width, height, ySpeed) {
+        constructor(x, y, r, xSpeed, ySpeed) {
           this.x = x;
           this.y = y;
-          this.width = width;
-          this.height = height;
+          this.r = r;
+          this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
         }
 
         draw() {
-          ctx.fillRect(this.x, this.y, this.width, this.height);
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+          ctx.fill(); // Use ctx.fill() to fill the ball
+          ctx.fillStyle = "rgb(195, 0, 0)";
         }
 
         moveUp() {
