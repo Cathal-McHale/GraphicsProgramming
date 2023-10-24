@@ -98,6 +98,11 @@
       function Collision(){
         const dx = ball.x - paddle1.x;
         const dy = ball.y - paddle1.y;
+        const distance = math.sqrt(dx * dx +dy * dy);
+
+        if (distance < ball.r +paddle1.r){
+          console.log("collision Detected");
+        }
       }
 
       $(document.body).on('keydown', function (e) {
