@@ -31,7 +31,7 @@
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
           ctx.fill();
-          ctx.fillStyle = "rgb(195, 0, 0)";
+          ctx.fillStyle = "rgb(295, 120, 40)";
         }
 
         move() {
@@ -67,7 +67,7 @@
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
           ctx.fill();
-          ctx.fillStyle = "rgb(195, 0, 0)";
+          ctx.fillStyle = "rgb(200, 30, 45)";
         }
 
         moveUp() {
@@ -107,11 +107,10 @@
         const distance1 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
 
         if (distance < ball.r + paddle1.r) {
-          console.log("Collision Detected");
+          console.log("Collision Detected with Paddle 1");
         }
-          //outputs to console to get collision
         if (distance1 < ball.r + paddle2.r) {
-          console.log("Collision Detected");
+          console.log("Collision Detected with Paddle 2");
         }
       }
 
