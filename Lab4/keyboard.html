@@ -14,29 +14,24 @@
     <canvas id="canvas-for-ball"></canvas>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script type="text/javascript">
-      // Gets a handle to the element with id canvas-for-ball.
       var canvas = document.getElementById("canvas-for-ball");
-      // Get a 2D context for the canvas.
       var ctx = canvas.getContext("2d");
-      // Make the fill style red.
       ctx.fillStyle = "rgb(255, 0, 0)";
 
-	  class Ball {
+      class Ball {
         constructor(x, y, r, xSpeed, ySpeed) {
           this.x = x;
           this.y = y;
-          this.r = r = 10;
+          this.r = r;
           this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
         }
 
         draw() {
-          // Clear the entire canvas
-          ctx.clearRect(0, 0, canvas.width, canvas.height); 
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-          ctx.stroke();
-         // ctx.fillStyle= "rgb(255,255,0,0)"
+          ctx.fill(); // Use ctx.fill() to fill the ball
+          ctx.fillStyle = "rgb(195, 0, 0)";
         }
 
         move() {
@@ -44,48 +39,32 @@
           this.y += this.ySpeed;
 
           if (this.y + this.r >= canvas.height) {
-            // Ball hits the bottom of the canvas
             this.y = canvas.height - this.r;
             this.ySpeed = -this.ySpeed;
           } else if (this.y - this.r <= 0) {
-            // Ball hits the top of the canvas
             this.y = this.r;
             this.ySpeed = -this.ySpeed;
           }
 
           if (this.x + this.r >= canvas.width || this.x - this.r <= 0) {
-            // Ball hits the left or right side of the canvas
             this.xSpeed = -this.xSpeed;
           }
-
-          this.draw();
         }
       }
 
-      // Create a ball object with horizontal and vertical velocity
-      var ball = new Ball(50, 20, 3, 1, 1);
+      var ball = new Ball(50, 20, 10, 1, 1);
 
-      function repeatme() {
-        ball.move();
-        requestAnimationFrame(repeatme);
-      }
-
-      repeatme();
       class Paddle {
         constructor(x, y, width, height, ySpeed) {
           this.x = x;
           this.y = y;
-          this.r = r;
           this.width = width;
           this.height = height;
           this.ySpeed = ySpeed;
         }
 
         draw() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height); 
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-          ctx.stroke();
+          ctx.fillRect(this.x, this.y, this.width, this.height);
         }
 
         moveUp() {
@@ -95,8 +74,6 @@
         moveDown() {
           this.y += this.ySpeed;
         }
-
-        
       }
 
       const paddle1 = new Paddle(10, 25, 10, 80, 5);
@@ -104,53 +81,35 @@
 
       function updateCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         ball.move();
         ball.draw();
         paddle1.draw();
         paddle2.draw();
+
         requestAnimationFrame(updateCanvas);
       }
 
       updateCanvas();
-      
- // Add a Javascript event listener to the keypress event.
- window.addEventListener("keypress", function (event) {
-        // Just log the event to the console.
-        console.log(event);
-      });
 
-      // Keypresses with jQuery
       $(document.body).on('keydown', function (e) {
-        console.log(e.which);
         switch (e.which) {
-          // key code for left arrow
           case 37:
             console.log('left arrow key pressed!');
             break;
-
-             // key code for right arrow
           case 39:
             console.log('right arrow key pressed!');
             break;
-
-
-
-           // W key for left paddle
-            case 87: 
+          case 87:
             paddle1.moveUp();
             break;
-      
-            // S key left paddle
-            case 83: 
+          case 83:
             paddle1.moveDown();
             break;
-             // Up arrow key right paddle
-            case 38:
+          case 38:
             paddle2.moveUp();
             break;
-
-             // Down arrow key right paddle
-            case 40:
+          case 40:
             paddle2.moveDown();
             break;
         }
