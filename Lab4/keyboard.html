@@ -30,7 +30,7 @@
         draw() {
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-          ctx.fill(); // Use ctx.fill() to fill the ball
+          ctx.fill();
           ctx.fillStyle = "rgb(195, 0, 0)";
         }
 
@@ -66,7 +66,7 @@
         draw() {
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-          ctx.fill(); // Use ctx.fill() to fill the ball
+          ctx.fill();
           ctx.fillStyle = "rgb(195, 0, 0)";
         }
 
@@ -89,21 +89,33 @@
         ball.draw();
         paddle1.draw();
         paddle2.draw();
+        
+        // Check for collision within the update loop
+        Collision();
 
         requestAnimationFrame(updateCanvas);
       }
 
-      updateCanvas();
-
-      function Collision(){
+      // Function to check for collision
+      function Collision() {
         const dx = ball.x - paddle1.x;
         const dy = ball.y - paddle1.y;
-        const distance = math.sqrt(dx * dx +dy * dy);
+        //checks for other paddle
+        const dx2 = ball.x - paddle2.x;
+        const dy2 = ball.y - paddle2.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const distance1 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
 
-        if (distance < ball.r +paddle1.r){
-          console.log("collision Detected");
+        if (distance < ball.r + paddle1.r) {
+          console.log("Collision Detected");
+        }
+          //outputs to console to get collision
+        if (distance1 < ball.r + paddle2.r) {
+          console.log("Collision Detected");
         }
       }
+
+      updateCanvas();
 
       $(document.body).on('keydown', function (e) {
         switch (e.which) {
