@@ -95,6 +95,11 @@
 
       updateCanvas();
 
+      function Collision(){
+        const dx = ball.x - paddle1.x;
+        const dy = ball.y - paddle1.y;
+      }
+
       $(document.body).on('keydown', function (e) {
         switch (e.which) {
           case 37:
