@@ -11,18 +11,17 @@
     </style>
   </head>
   <body>
-    <canvas id="canvas-for-ball"></canvas>
+    <canvas id="canvas-for-ball" height="400" width="600"></canvas>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script type="text/javascript">
       var canvas = document.getElementById("canvas-for-ball");
       var ctx = canvas.getContext("2d");
-      ctx.fillStyle = "rgb(255, 0, 0)";
 
       class Ball {
         constructor(x, y, r, xSpeed, ySpeed) {
           this.x = x;
           this.y = y;
-          this.r = r;
+          this.r = r = 30;
           this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
         }
@@ -30,8 +29,8 @@
         draw() {
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+          ctx.fillStyle = "rgb(200, 30, 40)";
           ctx.fill();
-          ctx.fillStyle = "rgb(295, 120, 40)";
         }
 
         move() {
@@ -58,7 +57,7 @@
         constructor(x, y, r, xSpeed, ySpeed) {
           this.x = x;
           this.y = y;
-          this.r = r;
+          this.r = r = 30;
           this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
         }
@@ -66,8 +65,8 @@
         draw() {
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+          ctx.fillStyle = "rgb(290, 110, 55)";
           ctx.fill();
-          ctx.fillStyle = "rgb(200, 30, 45)";
         }
 
         moveUp() {
@@ -79,8 +78,8 @@
         }
       }
 
-      const paddle1 = new Paddle(10, 25, 10, 80, 5);
-      const paddle2 = new Paddle(canvas.width - 20, 25, 10, 80, 5);
+      const paddle1 = new Paddle(50, 45, 10, 5, 5);
+      const paddle2 = new Paddle(canvas.width - 50, 45, 10, 5, 5);
 
       function updateCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -89,7 +88,7 @@
         ball.draw();
         paddle1.draw();
         paddle2.draw();
-        
+
         // Check for collision within the update loop
         Collision();
 
@@ -100,29 +99,39 @@
       function Collision() {
         const dx = ball.x - paddle1.x;
         const dy = ball.y - paddle1.y;
-        //checks for other paddle
         const dx2 = ball.x - paddle2.x;
         const dy2 = ball.y - paddle2.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const distance1 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
 
         if (distance < ball.r + paddle1.r) {
-          console.log("Collision Detected with Paddle 1");
+          console.log("Ball hit paddle1");
         }
         if (distance1 < ball.r + paddle2.r) {
-          console.log("Collision Detected with Paddle 2");
+          console.log("Ball hit paddle2");
         }
       }
 
+      // Initialize a collision message variable
+      var collisionMessage = "";
+
+      // Add a function to set the collision message
+      ball.setCollisionMessage = function (message) {
+        collisionMessage = message;
+        setTimeout(() => {
+          collisionMessage = ""; // Clear the message after 0.75 seconds
+        }, 750);
+      };
+
       updateCanvas();
 
-      $(document.body).on('keydown', function (e) {
+      $(document.body).on("keydown", function (e) {
         switch (e.which) {
           case 37:
-            console.log('left arrow key pressed!');
+            console.log("left arrow key pressed!");
             break;
           case 39:
-            console.log('right arrow key pressed!');
+            console.log("right arrow key pressed!");
             break;
           case 87:
             paddle1.moveUp();
