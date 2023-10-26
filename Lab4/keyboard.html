@@ -24,14 +24,45 @@
           this.r = r = 30;
           this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
+          this.rotation = 10;
         }
 
         draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-          ctx.fillStyle = "rgb(200, 30, 40)";
-          ctx.fill();
-        }
+  // Save current transformation state
+  ctx.save();
+
+  // Translate to the center of the ball
+  ctx.translate(this.x, this.y);
+
+  // Apply rotation
+  ctx.rotate(this.rotation);
+
+  // Draw the ball at the new (0, 0) position
+  ctx.beginPath();
+  
+  ctx.arc(0, 0, this.r, 0, 2 * Math.PI);
+  ctx.fillStyle = "rgb(200, 30, 40)";
+  ctx.fill();
+
+  ctx.beginPath();
+  // Start at the top-left corner
+  ctx.moveTo(-this.r, -this.r); 
+  // Draw a line to the bottom-right corner
+  ctx.lineTo(this.r, this.r);   
+   // Start at the top-right corner
+  ctx.moveTo(this.r, -this.r); 
+    // Draw a line to the bottom-left corner
+  ctx.lineTo(-this.r, this.r);
+   // Color of the "X" lines
+  ctx.strokeStyle = "white";  
+    // Line width
+  ctx.lineWidth = 4;         
+  ctx.stroke();
+
+  // Restore the original transformation state
+  ctx.restore();
+}
+
 
         move() {
           this.x += this.xSpeed;
