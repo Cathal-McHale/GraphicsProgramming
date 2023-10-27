@@ -127,11 +127,19 @@
         const distance = Math.sqrt(dx * dx + dy * dy);
         const distance1 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
 
-        if (distance < ball.r + paddle1.r) {
-          console.log("Ball hit paddle1");
+        if (distance < ball.r + paddle1.r){
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2D");
+        ctx.font = "30px Arial";
+        ctx.fillText("Collision!");
         }
+
+         
         if (distance1 < ball.r + paddle2.r) {
-          console.log("Ball hit paddle2");
+          var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2D");
+        ctx.font = "30px Arial";
+        ctx.fillText("Collision!");
         }
       }
 
