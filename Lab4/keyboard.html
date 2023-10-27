@@ -21,10 +21,10 @@
         constructor(x, y, r, xSpeed, ySpeed) {
           this.x = x;
           this.y = y;
-          this.r = r = 30;
+          this.r = r = 25;
           this.xSpeed = xSpeed;
           this.ySpeed = ySpeed;
-          this.rotation = 0.8;
+          this.rotation = 0.6;
         }
 
         draw() {
@@ -152,6 +152,13 @@
         setTimeout(() => {
           collisionMessage = ""; // Clear the message after 0.75 seconds
         }, 750);
+
+        if (Collision(ball, paddle1) || Collision(ball, paddle2)){
+          ctx.font = "20px Arial";
+          ctx.fillStyle ="black";
+          ctx.fillText("collision!", 100, 100);
+        }
+
       };
 
       updateCanvas();
@@ -176,6 +183,8 @@
           case 40:
             paddle2.moveDown();
             break;
+
+            
         }
       });
     </script>
