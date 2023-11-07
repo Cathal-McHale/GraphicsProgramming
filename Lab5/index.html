@@ -24,7 +24,7 @@ document.body.appendChild( renderer.domElement );
 //setting up tetrahedron details
 const geometry = new THREE.TetrahedronGeometry(2, 0);
 //color of material
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true} );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: false} );
 const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 
