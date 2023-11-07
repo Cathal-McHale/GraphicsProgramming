@@ -29,6 +29,20 @@ scene.add( cube );
 
 camera.position.z = 5;
 
+function animate() {
+    // Request the browser to call the animate function on the next frame
+    requestAnimationFrame(animate);
+
+    // Rotate the tetrahedron
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    // Render the scene using the defined camera
+    renderer.render(scene, camera);
+}
+
+// Initiate the animation loop
+animate();
         
     </script>
 </body>
