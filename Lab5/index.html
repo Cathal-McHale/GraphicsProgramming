@@ -1,54 +1,71 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-    
+
     <meta charset="UTF-8">
     <title>Three.js Tetrahedron</title>
     <style type="text/css">
-        body { margin: 0; }
-        canvas { width: 100%; height: 100% }
+        body {
+            margin: 0;
+        }
+        /*set canvas to full screen*/
+        canvas {
+            width: 100%;
+            height: 100%
+        }
     </style>
 </head>
+
 <body>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script type="text/javascript">
-    
-//creating scene
-const scene = new THREE.Scene();  
-const camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
-//setting up tetrahedron details
-const geometry = new THREE.TetrahedronGeometry(2, 0);
-//color of material
-const material = new THREE.MeshLambertMaterial( { color: 0x00ff00, wireframe: false} );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-var spotLight = new THREE.SpotLight(0xffffff);
-spotLight.position.set(3, 4.5, 4);
-scene.add(spotLight);
+        class ThreeJSTetrahedron{
+            constructor(){
+
+                 //creating scene
+        this.scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        //setting up tetrahedron details
+        const geometry = new THREE.TetrahedronGeometry(2, 0);
+        //color of material
+        const material = new THREE.MeshLambertMaterial({ color: 0x00ff00, wireframe: false });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        var spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(3, 4.5, 4);
+        scene.add(spotLight);
 
 
-camera.position.z = 5;
-
-function repeatMe() {
-    // Request the browser to call the repeatMe function on the next frame
-    requestAnimationFrame(repeatMe);
-
-    // Rotate the tetrahedron
-    cube.rotation.x += 0.02;
-    cube.rotation.y += 0.01;
-
-    // Render the scene using the defined camera
-    renderer.render(scene, camera);
-}
-
-// Initiate the repeatMe loop
-repeatMe();
+        camera.position.z = 5;
+        this.repeatMe();
+            }
+        }
         
+       
+
+        function repeatMe() {
+            // Request the browser to call the repeatMe function on the next frame
+            requestAnimationFrame(repeatMe);
+
+            // Rotate the tetrahedron
+            cube.rotation.x += 0.02;
+            cube.rotation.y += 0.01;
+
+            // Render the scene using the defined camera
+            renderer.render(scene, camera);
+        }
+
+        // Initiate the repeatMe loop
+        repeatMe();
+
     </script>
 </body>
+
 </html>
