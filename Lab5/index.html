@@ -27,23 +27,25 @@
 
                  //creating scene
         this.scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
+
         //setting up tetrahedron details
-        const geometry = new THREE.TetrahedronGeometry(2, 0);
+        this.geometry = new THREE.TetrahedronGeometry(2, 0);
+        
         //color of material
-        const material = new THREE.MeshLambertMaterial({ color: 0x00ff00, wireframe: false });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-        var spotLight = new THREE.SpotLight(0xffffff);
-        spotLight.position.set(3, 4.5, 4);
-        scene.add(spotLight);
+        this.material = new THREE.MeshLambertMaterial({ color: 0x00ff00, wireframe: false });
+        this.cube = new THREE.Mesh(geometry, material);
+        this.scene.add(cube);
+        this.spotLight = new THREE.SpotLight(0xffffff);
+        this.spotLight.position.set(3, 4.5, 4);
+        this.scene.add(spotLight);
 
 
-        camera.position.z = 5;
+        this.camera.position.z = 5;
         this.repeatMe();
             }
         }
