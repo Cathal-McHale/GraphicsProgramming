@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Three.js Tetrahedron</title>
+    <h1>Cathal McHale</h1>
     <style type="text/css">
         body {
             margin: 0;
         }
 
+        
         /*set canvas to full screen*/
         canvas {
             width: 100%;
@@ -52,7 +54,7 @@
                 const material = new THREE.MeshLambertMaterial({ color: 0xffff00, side: THREE.DoubleSide });
                 const plane = new THREE.Mesh(this.geometry, material);
                 plane.receiveShadow = true; // Allow the plane to have shadows
-                plane.position.y = -1; // Set the y-coordinate to a negative value to place it at the bottom
+                plane.position.y = -1; // Set the y to a - value to place it at the bottom
                 this.scene.add(plane);
 
                 this.spotLight = new THREE.SpotLight(0xffffff);
@@ -67,11 +69,15 @@
             repeatMe() {
                 requestAnimationFrame(this.repeatMe.bind(this));
 
-                // Update tetrahedron's position
+                
+                this.cube.rotation.x += 0.02;
+                this.cube.rotation.y += 0.01;
+
+                // Update position
                 this.z += this.zSpeed;
                 
                 // Bounce when reaching certain boundaries
-                if (this.z > 3 || this.z < -1) {
+                if (this.z > 3 || this.z < 0) {
                     this.zSpeed = -this.zSpeed;
                 }
 
