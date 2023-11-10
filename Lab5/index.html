@@ -10,7 +10,7 @@
             margin: 0;
         }
 
-        
+
         /*set canvas to full screen*/
         canvas {
             width: 100%;
@@ -42,7 +42,9 @@
 
                 this.cube.position.set(this.x, 0, this.z);
 
-                
+
+
+
             }
         }
 
@@ -69,13 +71,13 @@
             repeatMe() {
                 requestAnimationFrame(this.repeatMe.bind(this));
 
-                
+
                 this.cube.rotation.x += 0.02;
                 this.cube.rotation.y += 0.01;
 
                 // Update position
                 this.z += this.zSpeed;
-                
+
                 // Bounce when reaching certain boundaries
                 if (this.z > 3 || this.z < 0) {
                     this.zSpeed = -this.zSpeed;
@@ -88,7 +90,7 @@
         }
 
         const myTetrahedron = new PlaneGeo();
-        myTetrahedron.zSpeed = 0.05; // Set the speed for movement along the z-axis
+        myTetrahedron.zSpeed = 0.03; // Set the speed for movement along the z-axis
     </script>
 </body>
 
