@@ -12,7 +12,7 @@
         /*set canvas to full screen*/
         canvas {
             width: 100%;
-            height: 100%
+            height: 100%;
         }
     </style>
 </head>
@@ -21,51 +21,68 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script type="text/javascript">
         class ThreeJSTetrahedron {
-    constructor() {
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.shadowMap.enabled = true; // Enable shadow mapping
-        document.body.appendChild(this.renderer.domElement);
+            constructor(x, z, xSpeed, zSpeed) {
+                this.x = x || 0;
+                this.z = z || 0;
+                this.xSpeed = xSpeed || 0;
+                this.zSpeed = zSpeed || 0;
+                this.scene = new THREE.Scene();
+                this.geometry = new THREE.TetrahedronGeometry(2, 0);
+                this.material = new THREE.MeshLambertMaterial({ color: 0x00ff00, wireframe: false });
+                this.cube = new THREE.Mesh(this.geometry, this.material);
+                this.cube.castShadow = true; // Allow the tetrahedron to cast shadows
+                this.scene.add(this.cube);
+                this.camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.shadowMap.enabled = true; // Enable shadow mapping
+                document.body.appendChild(this.renderer.domElement);
 
-        this.geometry = new THREE.TetrahedronGeometry(2, 0);
-        this.material = new THREE.MeshLambertMaterial({ color: 0x00ff00, wireframe: false });
-        this.cube = new THREE.Mesh(this.geometry, this.material);
-        this.cube.castShadow = true; // Allow the tetrahedron to cast shadows
-        this.scene.add(this.cube);
+                this.cube.position.set(this.x, 0, this.z);
 
-        //plane code
-        const geometry = new THREE.PlaneGeometry(8, 8);
-        const material = new THREE.MeshLambertMaterial({ color: 0xffff00, side: THREE.DoubleSide });
-        const plane = new THREE.Mesh(geometry, material);
-        plane.receiveShadow = true; // Allow the plane to receive shadows
-        this.scene.add(plane);
+                
+            }
+        }
 
-        this.spotLight = new THREE.SpotLight(0xffffff);
-        this.spotLight.position.set(3, 4.5, 4);
-        this.spotLight.castShadow = true; // Enable the light to cast shadows
-        this.scene.add(this.spotLight);
+        class PlaneGeo extends ThreeJSTetrahedron {
+            constructor() {
+                super();
+                //plane code
+                this.geometry = new THREE.PlaneGeometry(8, 8);
+                const material = new THREE.MeshLambertMaterial({ color: 0xffff00, side: THREE.DoubleSide });
+                const plane = new THREE.Mesh(this.geometry, material);
+                plane.receiveShadow = true; // Allow the plane to have shadows
+                plane.position.y = -1; // Set the y-coordinate to a negative value to place it at the bottom
+                this.scene.add(plane);
 
-        this.camera.position.z = 5;
-        this.repeatMe();
-    }
+                this.spotLight = new THREE.SpotLight(0xffffff);
+                this.spotLight.position.set(3, 4.5, 4);
+                this.spotLight.castShadow = true; // allows the light to cast shadows
+                this.scene.add(this.spotLight);
+
+                this.camera.position.z = 5;
+                this.repeatMe();
+            }
 
             repeatMe() {
                 requestAnimationFrame(this.repeatMe.bind(this));
 
-                this.cube.rotation.x += 0.02;
-                this.cube.rotation.y += 0.01;
+                // Update tetrahedron's position
+                this.z += this.zSpeed;
+                
+                // Bounce when reaching certain boundaries
+                if (this.z > 3 || this.z < -1) {
+                    this.zSpeed = -this.zSpeed;
+                }
 
-                //  translation left to right                speed      distance
-                this.cube.position.x = Math.sin(Date.now() * 0.001) * 5;
-
+                this.cube.position.set(this.x, 0, this.z);
 
                 this.renderer.render(this.scene, this.camera);
             }
         }
 
-        const myTetrahedron = new ThreeJSTetrahedron();
+        const myTetrahedron = new PlaneGeo();
+        myTetrahedron.zSpeed = 0.05; // Set the speed for movement along the z-axis
     </script>
 </body>
 
