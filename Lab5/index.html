@@ -64,7 +64,19 @@
 
                 this.camera.position.z = 5;
                 this.repeatMe();
+
+
+                // Change tetrahedron color over time
+                function changeColor() {
+                    tetrahedron.material.color.setHex(Math.random() * 0xffffff);
+                }
+
+                // Change color every 500 milliseconds
+                if (Date.now() % 500 === 0) {
+                    changeColor();
+                }
             }
+            
 
             repeatMe() {
                 requestAnimationFrame(this.repeatMe.bind(this));
