@@ -14,7 +14,7 @@
 
 <body>
   <!-- HTML content-->
-  <h1>Cathal</h1>
+  <h1>Cathal McHale</h1>
 
   <script type="text/javascript">
     // JavaScript code
@@ -27,8 +27,8 @@
 
         function plotCO2Data() {
           var margin = { top: 20, right: 20, bottom: 50, left: 50 },
-              width = 600 - margin.left - margin.right, 
-              height = 400 - margin.top - margin.bottom;
+            width = 600 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
 
           var parseDate = d3.timeParse('%Y-%m-%d');
 
@@ -48,6 +48,23 @@
             .attr('height', height + margin.top + margin.bottom)
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+
+
+          // Create line function
+          var line = d3.line()
+            .x(function (d) { return x(parseDate(d["Date"])); })
+            .y(function (d) { return y(+d["Interpolated"]); });
+
+          // Append line to SVG
+          svg.append('path')
+            .data([data])
+            .attr('class', 'line')
+            .attr('d', line)
+            .style('stroke', 'red');
+
+
+
         }
 
         // Call the plotCO2Data function
