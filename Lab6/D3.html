@@ -8,16 +8,16 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <style type="text/css">
-    /* CSS styles go here */
+    /* CSS styles */
   </style>
 </head>
 
 <body>
-  <!--  HTML content goes here -->
+  <!-- HTML content-->
   <h1>Cathal</h1>
 
   <script type="text/javascript">
-    //  JavaScript code goes here
+    // JavaScript code
 
     // Ajax request to download JSON file
     $.ajax({
@@ -25,25 +25,33 @@
       dataType: 'json',
       success: function (data) {
 
-        function plotCO2Data(){
-          var margin = {top: 20, right: 20, bottom: 50, left: 50}
-          width = 600 - margin-left - margin-right,
-          height = 400 - margin-top - margin-bottom;
+        function plotCO2Data() {
+          var margin = { top: 20, right: 20, bottom: 50, left: 50 },
+              width = 600 - margin.left - margin.right, 
+              height = 400 - margin.top - margin.bottom;
 
           var parseDate = d3.timeParse('%Y-%m-%d');
 
-          //create x scale
+          // Create x scale
           var x = d3.scaleTime()
-          .domain(d3.extent(data, function(d) {return parseDate(d["Date"]); }))
-          .range([0, width]);
+            .domain(d3.extent(data, function (d) { return parseDate(d["Date"]); }))
+            .range([0, width]);
 
           // Create y scale
           var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return +d["Interpolated"]; })])
+            .domain([0, d3.max(data, function (d) { return +d["Interpolated"]; })])
             .range([height, 0]);
+
+          // Create SVG element
+          var svg = d3.select('body').append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
         }
 
-
+        // Call the plotCO2Data function
+        plotCO2Data();
 
         // Log the downloaded JSON data to the console
         console.log(data);
