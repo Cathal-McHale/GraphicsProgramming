@@ -24,6 +24,26 @@
       url: 'https://datahub.io/core/co2-ppm/r/co2-mm-mlo.json',
       dataType: 'json',
       success: function (data) {
+
+        function plotCO2Data(){
+          var margin = {top: 20, right: 20, bottom: 50, left: 50}
+          width = 600 - margin-left - margin-right,
+          height = 400 - margin-top - margin-bottom;
+
+          var parseDate = d3.timeParse('');
+
+          var x = d3.scaleTime()
+          .domain(d3.extent(data, function(d) {return parseDate(d["Date"]); }))
+          .range([0, width]);
+        }
+
+
+
+
+
+
+
+
         // Log the downloaded JSON data to the console
         console.log(data);
       },
