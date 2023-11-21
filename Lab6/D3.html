@@ -4,9 +4,8 @@
 <head>
   <title>D3.js Demo</title>
   <meta charset="UTF-8">
-  <!-- Include D3.js (version 5) from CDN -->
+  <!-- Include D3.js (version 5) and jQuery from CDNs -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <!-- Include jQuery from CDN -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <style type="text/css">
     /* Your CSS styles go here */
@@ -14,11 +13,25 @@
 </head>
 
 <body>
-  <!-- HTML content goes here -->
+  <!-- Your HTML content goes here -->
   <h1>Cathal McHale</h1>
 
   <script type="text/javascript">
-    //  JavaScript code goes here
+    // Your JavaScript code goes here
+
+    // Ajax request to download JSON file
+    $.ajax({
+      url: 'https://datahub.io/core/co2-ppm/r/co2-mm-mlo.json',
+      dataType: 'json',
+      success: function (data) {
+        // Log the downloaded JSON data to the console
+        console.log(data);
+      },
+      error: function (error) {
+        // Log an error if the download fails
+        console.error('Error downloading JSON file:', error);
+      }
+    });
   </script>
 </body>
 
