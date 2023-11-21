@@ -9,12 +9,18 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <style type="text/css">
     /* CSS styles */
+    h2 {
+      text-align: left;
+      color: #3498db;
+      margin-left: 250px;
+    }
   </style>
 </head>
 
 <body>
   <!-- HTML content-->
   <h1>Cathal McHale</h1>
+  <h2>CO2 Chart</h2>
 
   <script type="text/javascript">
     // JavaScript code
@@ -71,6 +77,17 @@
           // Append y axis
           svg.append('g')
             .call(d3.axisLeft(y));
+
+          // Add labels and title
+          svg.append('text')
+            .attr('transform', 'translate(' + (width / 2) + ',' + (height + margin.top + 20) + ')')
+            .style('text-anchor', 'middle')
+            .text('Date');
+
+          svg.append('text')
+            .attr('transform', 'translate(' + (height / 2) + ',' + (width + margin.bottom + 5) + ')')
+            .style('text-anchor', 'middle')
+            .text('Levels');
 
         }
 
