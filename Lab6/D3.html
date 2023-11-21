@@ -8,16 +8,16 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <style type="text/css">
-    /* Your CSS styles go here */
+    /* CSS styles go here */
   </style>
 </head>
 
 <body>
-  <!-- Your HTML content goes here -->
+  <!--  HTML content goes here -->
   <h1>Cathal</h1>
 
   <script type="text/javascript">
-    // Your JavaScript code goes here
+    //  JavaScript code goes here
 
     // Ajax request to download JSON file
     $.ajax({
@@ -30,17 +30,18 @@
           width = 600 - margin-left - margin-right,
           height = 400 - margin-top - margin-bottom;
 
-          var parseDate = d3.timeParse('');
+          var parseDate = d3.timeParse('%Y-%m-%d');
 
+          //create x scale
           var x = d3.scaleTime()
           .domain(d3.extent(data, function(d) {return parseDate(d["Date"]); }))
           .range([0, width]);
+
+          // Create y scale
+          var y = d3.scaleLinear()
+            .domain([0, d3.max(data, function(d) { return +d["Interpolated"]; })])
+            .range([height, 0]);
         }
-
-
-
-
-
 
 
 
