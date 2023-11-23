@@ -33,7 +33,7 @@
 
         function plotCO2Data() {
           var margin = { top: 20, right: 20, bottom: 50, left: 50 },
-            width = 600 - margin.left - margin.right,
+            width = 800 - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom;
 
           var parseDate = d3.timeParse('%Y-%m-%d');
@@ -45,7 +45,7 @@
 
           // Create y scale
           var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function (d) { return +d["Interpolated"]; })])
+            .domain([300, d3.max(data, function (d) { return +d["Interpolated"]; })])
             .range([height, 0]);
 
           // Create SVG element
@@ -55,19 +55,19 @@
             .append('g')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-
-
           // Create line function
           var trendLine = d3.line()
             .x(function (d) { return x(parseDate(d["Date"])); })
-            .y(function (d) { return y(+d["Interpolated"]); });
+            .y(function (d) { return y(+d["Interpolated"]); })
+            .curve(d3.curveLinear);
 
           // Append trend line to SVG
           svg.append('path')
             .data([data])
             .attr('class', 'trend-line')
             .attr('d', trendLine)
-            .style('stroke', 'red');
+            .style('stroke', 'red')
+            .style('fill', 'none'); // This removes the fill, making it just a line
 
 
           // Append x axis
@@ -102,7 +102,6 @@
             .attr('dy', '1em')
             .style('text-anchor', 'middle')
             .text('CO2 Level');
-
         }
 
         // Call the plotCO2Data function
