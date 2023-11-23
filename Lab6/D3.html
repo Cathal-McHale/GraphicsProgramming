@@ -58,16 +58,17 @@
 
 
           // Create line function
-          var line = d3.line()
+          var trendLine = d3.line()
             .x(function (d) { return x(parseDate(d["Date"])); })
             .y(function (d) { return y(+d["Interpolated"]); });
 
-          // Append line to SVG
+          // Append trend line to SVG
           svg.append('path')
             .data([data])
-            .attr('class', 'line')
-            .attr('d', line)
+            .attr('class', 'trend-line')
+            .attr('d', trendLine)
             .style('stroke', 'red');
+
 
           // Append x axis
           svg.append('g')
@@ -78,13 +79,22 @@
           svg.append('g')
             .call(d3.axisLeft(y));
 
+          // Append x axis with ticks
+          svg.append('g')
+            .attr('transform', 'translate(0,' + height + ')')
+            .call(d3.axisBottom(x).ticks(10));
+
+          // Append y axis with ticks
+          svg.append('g')
+            .call(d3.axisLeft(y).ticks(10));
+
           // Add labels and title
           svg.append('text')
             .attr('transform', 'translate(' + (width / 2) + ',' + (height + margin.top + 20) + ')')
             .style('text-anchor', 'middle')
             .text('Date');
 
-            svg.append('text')
+          svg.append('text')
             //rotate sideways
             .attr('transform', 'rotate(-90)')
             .attr('y', 0 - margin.left)
